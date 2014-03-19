@@ -1,0 +1,26 @@
+{
+  "name": "coil",
+  "description": "Control and automate all the things",
+  "version": "0.0.1-1",
+  "author": "Mark Kropf",
+  "private": true,
+  "engines": {
+    "node": ">=0.6"
+  },
+  "dependencies": {
+    "socket.io": "*",
+    "nconf": "*",
+    "node-uuid": "*",
+    "underscore": "*",
+    "nodejs-microdb": "*",
+    "node-forge": "*",
+    "simple-crypt": "*",
+    "request": "*",
+    "a2r-osc": "*",
+    "cron": "*"
+  },
+  "subdomain": "coil",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
