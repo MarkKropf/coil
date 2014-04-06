@@ -78,6 +78,8 @@ if (peer.readDigest().length <=2) {
 
 job.oldestPeer.start();
 //var randomKeys = crypto.createKeys();
+//console.log(JSON.stringify(randomKeys.privateKey));
+//console.log(JSON.stringify(randomKeys.publicKey));
 //nconf.set('privateKey', randomKeys.privateKey);
 //nconf.set('publicKey', randomKeys.publicKey);
 // console.log(randomKeys.privateKey);
