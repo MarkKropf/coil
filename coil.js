@@ -33,8 +33,9 @@ if(nconf.get('newidentity')) {
 	var newPublicKey = newKeys.public;
 	nconf.set('peerId',newId);
 	nconf.set('state','alive');
-	nconf.set('privateKey', newPrivateKey);
+	nconf.set('maxVersion','1');
 	nconf.set('publicKey', newPublicKey);
+	nconf.set('privateKey', newPrivateKey);
 	if (peer.createPeer(newId,'','',newPublicKey)) {
 		console.log('[coil] Successfully generated new identity');
 	} else {
@@ -48,7 +49,10 @@ if(nconf.get('newidentity')) {
 }
 
 // Load Available transports
-var traninit = transport.initialize(nconf.get('transport'),peer);
+if(!transport.initialize(nconf.get('transport'),peer)) {
+	console.log("[coil] Error: No transports Found");
+	process.exit(1);
+}
 
 // Coil Argument to provide seeds at execution
 if(nconf.get('s')) {
@@ -63,7 +67,7 @@ if(nconf.get('s')) {
 		nconf.get('seeds').push(nconf.get('seed'));
 	}
 }
-// Check to make sure there are seeds now in the config
+// Check to make sure there are seeds in the config
 if(!nconf.get('seeds')) {
 	console.log('[coil] Error: No seeds found');
 	process.exit(1);
@@ -76,23 +80,19 @@ if (peer.readDigest().length <=2) {
 	});
 }
 
-job.oldestPeer.start();
-//var randomKeys = crypto.createKeys();
-//console.log(JSON.stringify(randomKeys.privateKey));
-//console.log(JSON.stringify(randomKeys.publicKey));
-//nconf.set('privateKey', randomKeys.privateKey);
-//nconf.set('publicKey', randomKeys.publicKey);
-// console.log(randomKeys.privateKey);
-// console.log(randomKeys.publicKey);
-// nconf.save(function (err) {
-//    if (err) {
-//      console.error(err.message);
-//      return;
-//    }
-//    console.log('Configuration saved successfully.');
-// });
 // Begin Connecting to peers
+job.oldestPeer.start();
+
+nconf.save(function (err) {
+   if (err) {
+     console.error(err.message);
+     return;
+   }
+   console.log('Configuration saved successfully.');
+});
+
+
+// Crypto Test
 //var priv_pem = nconf.get('privateKey');
 //var pub_pem = nconf.get('publicKey');
 //crypto.encryptMessage(pub_pem,"Hello World");
-// Welcome to Coil
