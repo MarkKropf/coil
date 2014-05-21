@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Coil**, a completely decentralized nodejs application to coordinate automation via gossipy communication.
+**Coil** is a completely decentralized nodejs application to coordinate automation via gossipy communication.
 
 Coil currently communicates between nodes using http calls. As long as one coil node is publicly reachable, all other nodes should be able to update their digests.
 

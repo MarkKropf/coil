@@ -57,7 +57,7 @@ if(!transport.initialize(nconf.get('transport'),peer)) {
 // Coil Argument to provide seeds at execution
 if(nconf.get('s')) {
 	console.log('[coil] Loading new Seeds');
-	if(nconf.get('seed')==true) {
+	if(nconf.get('seed')) {
 		console.log('[coil] Error: No seed input provided');
 		process.exit(1);
 	} else {
