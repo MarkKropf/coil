@@ -1,8 +1,7 @@
-var nconf = require('nconf');
+GLOBAL.nconf = require('nconf');
 var util = require('./lib/coil-util.js');
 var crypto = require('./lib/coil-crypto.js');
 var transport = require('./lib/coil-transport.js');
-var socketio = require('socket.io');
 var peer = require('./lib/coil-peer.js');
 var job = require('./lib/coil-job.js');
 
@@ -78,6 +77,12 @@ if (peer.readDigest().length <=2) {
 		peer.createPeer(value.peerId, value.state, value.transport, "0", value.publicKey, new Date().getTime());
 		console.log("[coil] Adding seed peer: " + value.peerId);
 	});
+}
+
+// If current host is not found in peers.db, add it
+if (!peer.readPeer(nconf.get('peerId'))) {
+	peer.createPeer(nconf.get('peerId'), nconf.get('state'), nconf.get('transport'), nconf.get('maxVersion'), nconf.get('publicKey'), new Date().getTime());
+	console.log('[coil] Added self to peer DB');
 }
 
 // Begin Connecting to peers

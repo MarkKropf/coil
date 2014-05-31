@@ -5,7 +5,7 @@
   "author": "Mark Kropf",
   "private": true,
   "engines": {
-    "node": ">=0.6"
+    "node": "0.10.28"
   },
   "dependencies": {
     "nconf": "*",

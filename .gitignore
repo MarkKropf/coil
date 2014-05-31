@@ -2,6 +2,10 @@
 config.json
 peers.db
 
+# Cloud Foundry
+manifest.yml
+.cfignore
+
 # Npm install files
 node_modules
 npm-debug.log
